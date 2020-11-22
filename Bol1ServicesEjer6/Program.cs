@@ -26,6 +26,7 @@ namespace Bol1ServicesEjer6
 
             player1.Start();
             player2.Start();
+            display.IsBackground = true;
             display.Start();
 
             player1.Join();
@@ -44,27 +45,30 @@ namespace Bol1ServicesEjer6
             {
                 lock (key)
                 {
-
-                    number = rand.Next(1, 11);
-                    if (number == 5 || number == 7)
+                    if (!win)
                     {
-                        start = true; //ya cuenta como que no lleva girando desde el inicio pues la paró Player 1
-                        if (start && !run)
+                        number = rand.Next(1, 11);
+                        if (number == 5 || number == 7)
                         {
-                            result = result + 4;
-                        }
-                        result = result + 1;
-                        run = false;
-                        if (result >= 20)
-                        {
-                            result = 20;
-                            win = true;
-                        }
+                            start = true; //ya cuenta como que no lleva girando desde el inicio pues la paró Player 1
+                            if (start && !run)
+                            {
+                                result = result + 4;
+                            }
+                            result = result + 1;
+                            run = false;
+                            if (result >= 20)
+                            {
+                                result = 20;
+                                win = true;
+                            }
 
+                        }
+                        drawResult(result);
+                        Console.SetCursorPosition(0, 0);
+                        Console.WriteLine("Player 1 " + number + " ");
                     }
-                    drawResult(result);
-                    Console.SetCursorPosition(0, 0);
-                    Console.WriteLine("Player 1 " + number + " ");
+
                 }
                 Thread.Sleep(rand.Next(100, 100 * number));
             }
@@ -101,8 +105,8 @@ namespace Bol1ServicesEjer6
                     }
 
 
-                    Thread.Sleep(rand.Next(100, 100 * number));
                 }
+                    Thread.Sleep(rand.Next(100, 100 * number));
             }
         }
 
@@ -139,7 +143,7 @@ namespace Bol1ServicesEjer6
         static public void drawResult(int numberDraw)
         {
             Console.SetCursorPosition(30, 2);
-            Console.WriteLine("Result: "+numberDraw+"  ");
+            Console.WriteLine("Result: " + numberDraw + "  ");
         }
     }
 }
